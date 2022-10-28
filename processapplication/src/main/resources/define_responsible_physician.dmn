@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<definitions xmlns="https://www.omg.org/spec/DMN/20191111/MODEL/" xmlns:dmndi="https://www.omg.org/spec/DMN/20191111/DMNDI/" xmlns:dc="http://www.omg.org/spec/DMN/20180521/DC/" xmlns:modeler="http://camunda.org/schema/modeler/1.0" xmlns:di="http://www.omg.org/spec/DMN/20180521/DI/" xmlns:biodi="http://bpmn.io/schema/dmn/biodi/2.0" id="Definitions_0fd5ftl" name="DRD" namespace="http://camunda.org/schema/1.0/dmn" exporter="Camunda Modeler" exporterVersion="5.3.0" modeler:executionPlatform="Camunda Cloud" modeler:executionPlatformVersion="8.0.0">
+<definitions xmlns="https://www.omg.org/spec/DMN/20191111/MODEL/" xmlns:dmndi="https://www.omg.org/spec/DMN/20191111/DMNDI/" xmlns:dc="http://www.omg.org/spec/DMN/20180521/DC/" xmlns:modeler="http://camunda.org/schema/modeler/1.0" xmlns:di="http://www.omg.org/spec/DMN/20180521/DI/" xmlns:biodi="http://bpmn.io/schema/dmn/biodi/2.0" id="RandomDMNID" name="DRD" namespace="http://camunda.org/schema/1.0/dmn" exporter="Camunda Modeler" exporterVersion="5.3.0" modeler:executionPlatform="Camunda Cloud" modeler:executionPlatformVersion="8.0.0">
   <decision id="DoctorDesicion" name="zuständige Ärtz:in bestimmen">
     <informationRequirement id="InformationRequirement_16sbq84">
-      <requiredDecision href="#Decision_17vvrhk" />
+      <requiredDecision href="#Decision_2" />
     </informationRequirement>
     <informationRequirement id="InformationRequirement_0zyy4o4">
-      <requiredDecision href="#Decision_1bbbajg" />
+      <requiredDecision href="#Decision_3" />
     </informationRequirement>
     <informationRequirement id="InformationRequirement_01f6y7s">
-      <requiredDecision href="#Decision_07eioq7" />
+      <requiredDecision href="#Decision_1" />
     </informationRequirement>
     <decisionTable id="DecisionTable_19eck86" hitPolicy="FIRST">
       <input id="Input_1" label="ist es ein Notfall?">
@@ -27,6 +27,20 @@
         </inputExpression>
       </input>
       <output id="Output_1" label="welcher Arzt" name="responsible_physician" typeRef="string" biodi:width="192" />
+      <rule id="DecisionRule_1glwphy">
+        <inputEntry id="UnaryTests_006klrd">
+          <text>false</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_097f70f">
+          <text>true</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_1sq9tx0">
+          <text>true</text>
+        </inputEntry>
+        <outputEntry id="LiteralExpression_1ntv55e">
+          <text>"Gapr"</text>
+        </outputEntry>
+      </rule>
       <rule id="DecisionRule_1c59204">
         <inputEntry id="UnaryTests_02lr8j0">
           <text>true</text>
@@ -69,23 +83,9 @@
           <text>"Gaen"</text>
         </outputEntry>
       </rule>
-      <rule id="DecisionRule_1glwphy">
-        <inputEntry id="UnaryTests_006klrd">
-          <text>false</text>
-        </inputEntry>
-        <inputEntry id="UnaryTests_097f70f">
-          <text>true</text>
-        </inputEntry>
-        <inputEntry id="UnaryTests_1sq9tx0">
-          <text>true</text>
-        </inputEntry>
-        <outputEntry id="LiteralExpression_1ntv55e">
-          <text>"Gapr</text>
-        </outputEntry>
-      </rule>
     </decisionTable>
   </decision>
-  <decision id="Decision_07eioq7" name="Versicherungstyp">
+  <decision id="Decision_1" name="Versicherungstyp">
     <decisionTable id="DecisionTable_119qlbs" hitPolicy="FIRST">
       <input id="InputClause_14anhez" label="Versicherungs Typ">
         <inputExpression id="LiteralExpression_1qf2aon" typeRef="string">
@@ -95,7 +95,7 @@
       <output id="OutputClause_0oiespc" name="PrivatOutput" typeRef="boolean" />
       <rule id="DecisionRule_0c82zts">
         <inputEntry id="UnaryTests_0wx8cv6">
-          <text>contains(?, "Privat versichert")</text>
+          <text>contains(?, "V1")</text>
         </inputEntry>
         <outputEntry id="LiteralExpression_1n7ayq0">
           <text>true</text>
@@ -111,7 +111,7 @@
       </rule>
     </decisionTable>
   </decision>
-  <decision id="Decision_17vvrhk" name="Notfall">
+  <decision id="Decision_2" name="Notfall">
     <decisionTable id="DecisionTable_1u1x1d0" hitPolicy="FIRST">
       <input id="InputClause_1new7tp" label="Notfall?">
         <inputExpression id="LiteralExpression_0kbqc3b" typeRef="boolean">
@@ -137,7 +137,7 @@
       </rule>
     </decisionTable>
   </decision>
-  <decision id="Decision_1bbbajg" name="zugehörige Abteilung">
+  <decision id="Decision_3" name="zugehörige Abteilung">
     <decisionTable id="DecisionTable_0biy6xv" hitPolicy="FIRST">
       <input id="InputClause_0rzxcie" biodi:width="326">
         <inputExpression id="LiteralExpression_00j44q1" typeRef="string">
@@ -161,36 +161,44 @@
           <text>false</text>
         </outputEntry>
       </rule>
+      <rule id="DecisionRule_003avr1">
+        <inputEntry id="UnaryTests_0mce0hh">
+          <text></text>
+        </inputEntry>
+        <outputEntry id="LiteralExpression_0mxjm97">
+          <text></text>
+        </outputEntry>
+      </rule>
     </decisionTable>
   </decision>
   <dmndi:DMNDI>
     <dmndi:DMNDiagram>
       <dmndi:DMNShape dmnElementRef="DoctorDesicion">
-        <dc:Bounds height="80" width="180" x="470" y="80" />
+        <dc:Bounds height="80" width="180" x="400" y="80" />
       </dmndi:DMNShape>
       <dmndi:DMNEdge id="DMNEdge_0ddyr2w" dmnElementRef="InformationRequirement_16sbq84">
-        <di:waypoint x="560" y="300" />
-        <di:waypoint x="560" y="180" />
-        <di:waypoint x="560" y="160" />
+        <di:waypoint x="490" y="300" />
+        <di:waypoint x="490" y="180" />
+        <di:waypoint x="490" y="160" />
       </dmndi:DMNEdge>
       <dmndi:DMNEdge id="DMNEdge_1hgc8ok" dmnElementRef="InformationRequirement_0zyy4o4">
-        <di:waypoint x="800" y="300" />
-        <di:waypoint x="605" y="180" />
-        <di:waypoint x="605" y="160" />
+        <di:waypoint x="730" y="300" />
+        <di:waypoint x="535" y="180" />
+        <di:waypoint x="535" y="160" />
       </dmndi:DMNEdge>
       <dmndi:DMNEdge id="DMNEdge_1d2t5i5" dmnElementRef="InformationRequirement_01f6y7s">
-        <di:waypoint x="320" y="300" />
-        <di:waypoint x="515" y="180" />
-        <di:waypoint x="515" y="160" />
+        <di:waypoint x="250" y="300" />
+        <di:waypoint x="445" y="180" />
+        <di:waypoint x="445" y="160" />
       </dmndi:DMNEdge>
-      <dmndi:DMNShape id="DMNShape_1j3n0d8" dmnElementRef="Decision_07eioq7">
-        <dc:Bounds height="80" width="180" x="230" y="300" />
+      <dmndi:DMNShape id="DMNShape_1j3n0d8" dmnElementRef="Decision_1">
+        <dc:Bounds height="80" width="180" x="160" y="300" />
       </dmndi:DMNShape>
-      <dmndi:DMNShape id="DMNShape_0cn9338" dmnElementRef="Decision_17vvrhk">
-        <dc:Bounds height="80" width="180" x="470" y="300" />
+      <dmndi:DMNShape id="DMNShape_0cn9338" dmnElementRef="Decision_2">
+        <dc:Bounds height="80" width="180" x="400" y="300" />
       </dmndi:DMNShape>
-      <dmndi:DMNShape id="DMNShape_10bci9c" dmnElementRef="Decision_1bbbajg">
-        <dc:Bounds height="80" width="180" x="710" y="300" />
+      <dmndi:DMNShape id="DMNShape_10bci9c" dmnElementRef="Decision_3">
+        <dc:Bounds height="80" width="180" x="640" y="300" />
       </dmndi:DMNShape>
     </dmndi:DMNDiagram>
   </dmndi:DMNDI>
